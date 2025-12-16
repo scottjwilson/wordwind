@@ -19,6 +19,22 @@
   <?php else : ?>
     <p>No content found.</p>
   <?php endif; ?>
+
+
+  <?php
+    $athletes = new WP_Query([
+      'posts_per_page' => 10,
+      'post_type' => 'athlete',
+    ]);
+
+    while($athletes->have_posts()) {
+      $athletes->the_post(); ?>
+      <p><?php the_title(); ?></p>
+      <?php
+
+    }
+      
+  ?>
 </main>
 
 <?php get_footer(); ?>

@@ -19,12 +19,19 @@
                         <span class="text-white ml-2">SPORTS JOURNAL</span>
                     </div>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="hover:text-bsj-gold transition font-medium">NIL</a>
-                    <a href="#" class="hover:text-bsj-gold transition font-medium">Contracts</a>
-                    <a href="#" class="hover:text-bsj-gold transition font-medium">Betting</a>
-                    <a href="#" class="hover:text-bsj-gold transition font-medium">Trades</a>
-                    <a href="#" class="hover:text-bsj-gold transition font-medium">Deals</a>
+                <div class="hidden md:flex items-center space-x-8 ">
+                    <div class="flex space-x-8">
+                    <?php wp_nav_menu([
+                          'theme_location' => 'menuTop',
+                          'container' => false,
+                          'menu_class' => 'flex space-x-8',
+                          'fallback_cb' => false,
+                          'walker' => new Custom_Tailwind_Walker(),
+                      ]); ?>
+                        <!-- <a href="#" class="text-white hover:text-bsj-gold">Home</a>
+                        <a href="#" class="text-white hover:text-bsj-gold">About</a>
+                        <a href="#" class="text-white hover:text-bsj-gold">Contact</a> -->
+                </div>
                     <button class="bg-bsj-gold text-bsj-navy px-6 py-2 rounded-md font-semibold hover:bg-yellow-500 transition">Subscribe</button>
                 </div>
             </div>

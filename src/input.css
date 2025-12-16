@@ -8,6 +8,3 @@
     --color-bsj-light: #F8FAFC;
 }
 
-.main-nav {
-    @apply hidden md:flex items-center space-x-8
-}
