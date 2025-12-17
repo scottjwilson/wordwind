@@ -158,40 +158,112 @@
         </div>
     </section>
 
-  <?php if ( have_posts() ) : ?>
-    <?php while ( have_posts() ) : the_post(); ?>
-      <article <?php post_class(); ?>>
-        <h1 class="text-5xl font-bold">
-           <a href="<?php the_permalink();?>">
-             <?php the_title(); ?>
-           </a>
+    <?php
+  $athletes = new WP_Query([
+    'posts_per_page' => 10,
+    'post_type' => 'athlete',
+  ]);
 
-      </h1>
-        <div class="content">
-
-          <?php the_content(); ?>
+  if ($athletes->have_posts()) : ?>
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-bsj-navy mb-8">Athletes</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <?php while($athletes->have_posts()) {
+            $athletes->the_post(); ?>
+            
+            <article class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+              <div class="flex items-start justify-between mb-4">
+                <h3 class="text-xl font-bold text-bsj-navy">
+                  <a href="<?php the_permalink(); ?>" class="hover:text-bsj-blue transition">
+                    <?php the_title(); ?>
+                  </a>
+                </h3>
+              </div>
+              
+              <div class="space-y-3">
+                <?php if (get_field('position')) : ?>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs text-bsj-gold font-bold uppercase">Position</span>
+                    <span class="text-sm text-gray-700 font-medium"><?php the_field('position'); ?></span>
+                  </div>
+                <?php endif; ?>
+                
+                <?php if (get_field('school')) : 
+  $school = get_field('school');
+  $school_name = '';
+  
+  if (is_object($school)) {
+    $school_name = $school->name;
+  } elseif (is_numeric($school)) {
+    $term = get_term($school);
+    if ($term && !is_wp_error($term)) {
+      $school_name = $term->name;
+    }
+  }
+  
+  if ($school_name) : ?>
+    <div class="flex items-center gap-2">
+      <span class="text-xs text-bsj-gold font-bold uppercase">School</span>
+      <span class="text-sm text-gray-700 font-medium"><?php echo esc_html($school_name); ?></span>
+    </div>
+  <?php endif; ?>
+<?php endif; ?>
+                
+                <?php if (get_field('status')) : ?>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs text-bsj-gold font-bold uppercase">Status</span>
+                    <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-semibold">
+                      <?php the_field('status'); ?>
+                    </span>
+                  </div>
+                <?php endif; ?>
+                
+                <?php if (get_field('evaluation')) : ?>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs text-bsj-gold font-bold uppercase">Evaluation</span>
+                    <span class="text-sm text-gray-700 font-semibold"><?php the_field('evaluation'); ?></span>
+                  </div>
+                <?php endif; ?>
+                
+                <?php
+                  $sponsors = get_field('sponsors');
+                  if ($sponsors) {
+                    $sponsor_names = array();
+                    foreach ($sponsors as $sponsor) {
+                      if (is_object($sponsor)) {
+                        $sponsor_names[] = $sponsor->name;
+                      } elseif (is_numeric($sponsor)) {
+                        $term = get_term($sponsor);
+                        if ($term && !is_wp_error($term)) {
+                          $sponsor_names[] = $term->name;
+                        }
+                      }
+                    }
+                    if (!empty($sponsor_names)) {
+                      echo '<div class="pt-2 border-t border-gray-100">';
+                      echo '<span class="text-xs text-bsj-gold font-bold uppercase block mb-2">Sponsors</span>';
+                      echo '<div class="flex flex-wrap gap-2">';
+                      foreach ($sponsor_names as $name) {
+                        echo '<span class="inline-block outline text-bsj-navy px-3 py-1 rounded-full text-xs font-bold">' . esc_html($name) . '</span>';
+                      }
+                      echo '</div>';
+                      echo '</div>';
+                    }
+                  }
+                ?>
+              </div>
+            </article>
+            
+          <?php } ?>
         </div>
-      </article>
-    <?php endwhile; ?>
-  <?php else : ?>
-    <p>No content found.</p>
+      </div>
+    </section>
+    
+    <?php wp_reset_postdata(); ?>
   <?php endif; ?>
 
-
-  <?php
-    $athletes = new WP_Query([
-      'posts_per_page' => 10,
-      'post_type' => 'athlete',
-    ]);
-
-    while($athletes->have_posts()) {
-      $athletes->the_post(); ?>
-      <p><?php the_title(); ?></p>
-      <?php
-
-    }
-      
-  ?>
 </main>
 
 <?php get_footer(); ?>
