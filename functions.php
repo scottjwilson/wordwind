@@ -5,14 +5,23 @@ function wordwind_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'wordwind_enqueue_styles');
 
+
 function wordwind_setup() { 
   register_nav_menu('menuTop', 'Menu Top');
   add_theme_support('title-tag');
+  add_theme_support('post-thumbnails');
 }
 
 add_action('after_setup_theme', 'wordwind_setup');
 
+require_once get_template_directory() . '/inc/template-sections.php';
+require_once get_template_directory() . '/inc/template-athletes.php';
+require_once get_template_directory() . '/inc/template-functions.php';
 
+function wpdocs_custom_excerpt_length( $length ) {
+	return 10;
+}
+add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
 
 if ( ! class_exists( 'Custom_Tailwind_Walker' ) ) {
   class Custom_Tailwind_Walker extends Walker_Nav_Menu {
@@ -65,3 +74,5 @@ if ( ! class_exists( 'Custom_Tailwind_Walker' ) ) {
       // You can also override start_lvl() and end_lvl() to customize <ul> wrappers
   }
 }
+
+

@@ -15,9 +15,11 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center">
                     <div class="text-2xl font-bold tracking-tight">
+                      <a href="<?php echo home_url(); ?>">
                         <span class="text-bsj-gold">BALL STREET</span>
                         <span class="text-white ml-2">SPORTS JOURNAL</span>
-                    </div>
+                      </a>
+                      </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8 ">
                     <div class="flex space-x-8">

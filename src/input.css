@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+@plugin "@tailwindcss/typography";
 
 @theme {
     --color-bsj-navy: #0A1628;
