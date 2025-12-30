@@ -7,7 +7,7 @@
  function getHeroSection($args = array()) {
     // Set default values
     $defaults = array(
-        'badge' => 'THE LATEST',
+        'badge' => 'BREAKING NEWS',
         'title' => 'Where Sports Meets Business Intelligence',
         'subtitle' => 'In-depth coverage of NIL deals, athlete contracts, betting markets, and the billion-dollar business behind professional and college athletics.',
         'primary_button_text' => 'Read Latest',
@@ -100,7 +100,7 @@ function getNewsletter(){
                   <input 
                       type="email" 
                       placeholder="Enter your email" 
-                      class="flex-1 px-6 py-4 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-bsj-gold"
+                      class="flex-1 px-6 py-4 rounded-md text-gray-900 ring-1 ring-bsj-gold focus:outline-none focus:ring-2"
                   />
                   <button class="bg-bsj-gold text-bsj-navy px-8 py-4 rounded-md font-bold hover:bg-yellow-500 transition whitespace-nowrap">
                       Subscribe Free
