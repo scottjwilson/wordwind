@@ -50,7 +50,7 @@
                             <?php if (!$has_thumbnail) : ?>
                                 <div class="text-white text-6xl font-bold opacity-20 group-hover:scale-110 transition duration-300"><?php echo $category_emoji; ?></div>
                             <?php else : ?>
-                                <div class="w-full h-full bg-black bg-opacity-30 group-hover:bg-opacity-20 transition duration-300"></div>
+                                <!-- <div class="w-full h-full bg-black bg-opacity-30 group-hover:bg-opacity-20 transition duration-300"></div> -->
                             <?php endif; ?>
                         </div>
                         <div class="text-xs text-bsj-gold font-bold mb-2"><?php echo esc_html($category_name); ?></div>
@@ -63,6 +63,7 @@
                         <div class="text-sm text-gray-500"><?php echo $read_time; ?> min read • <?php echo get_the_date('M j, Y'); ?></div>
                     </a>
                 </article>
+                
                 <?php
                     endwhile;
                     wp_reset_postdata();
