@@ -7,7 +7,7 @@
  function getHeroSection($args = array()) {
     // Set default values
     $defaults = array(
-        'badge' => 'BREAKING NEWS',
+        'badge' => 'THE LATEST',
         'title' => 'Where Sports Meets Business Intelligence',
         'subtitle' => 'In-depth coverage of NIL deals, athlete contracts, betting markets, and the billion-dollar business behind professional and college athletics.',
         'primary_button_text' => 'Read Latest',
