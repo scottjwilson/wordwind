@@ -5,8 +5,19 @@ function wordwind_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'wordwind_enqueue_styles');
 
+function wordwind_enqueue_scripts() {
+  wp_enqueue_script(
+    'athletes-table',
+    get_template_directory_uri() . '/src/js/athletes-table.js',
+    array(),
+    filemtime(get_template_directory() . '/src/js/athletes-table.js'),
+    true
+  );
+}
+add_action('wp_enqueue_scripts', 'wordwind_enqueue_scripts');
 
-function wordwind_setup() { 
+
+function wordwind_setup() {
   register_nav_menu('menuTop', 'Menu Top');
   add_theme_support('title-tag');
   add_theme_support('post-thumbnails');
@@ -32,11 +43,11 @@ if ( ! class_exists( 'Custom_Tailwind_Walker' ) ) {
 
           $classes   = empty( $item->classes ) ? array() : (array) $item->classes;
           // Add custom tailwind classes to all <li> items
-          $classes[] = 'mb-4 lg:mb-0 lg:mr-6'; 
+          $classes[] = 'mb-4 lg:mb-0 lg:mr-6';
 
           if ( in_array( 'current-menu-item', $classes, true ) ) {
               // Add specific classes for active/current menu items
-              $classes[] = 'underline'; 
+              $classes[] = 'underline';
           }
 
           $class_names = implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
@@ -74,5 +85,3 @@ if ( ! class_exists( 'Custom_Tailwind_Walker' ) ) {
       // You can also override start_lvl() and end_lvl() to customize <ul> wrappers
   }
 }
-
-
