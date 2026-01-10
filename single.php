@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <?php while (have_posts()) : the_post(); ?>
-  
+
   <?php
     // Get associated athlete
     $athlete = get_field('associated_athlete'); // Adjust field name if different (e.g., 'associated_athlete')
@@ -9,7 +9,7 @@
     $athlete_name = '';
     $athlete_permalink = '';
     $athlete_image = '';
-    
+
     if ($athlete) {
       // Handle ACF relationship field (can be object, array, or ID)
       if (is_array($athlete)) {
@@ -19,66 +19,53 @@
         $athlete_id = $athlete->ID;
         $athlete_name = $athlete->post_title;
         $athlete_permalink = get_permalink($athlete->ID);
-        $athlete_image = get_the_post_thumbnail($athlete->ID, 'thumbnail', array('class' => 'w-12 h-12 rounded-lg object-cover'));
+        $athlete_image = get_the_post_thumbnail($athlete->ID, 'thumbnail', array('class' => 'w-12 h-12 object-cover'));
       } elseif (is_numeric($athlete)) {
         $athlete_id = $athlete;
         $athlete_name = get_the_title($athlete);
         $athlete_permalink = get_permalink($athlete);
-        $athlete_image = get_the_post_thumbnail($athlete, 'thumbnail', array('class' => 'w-12 h-12 rounded-lg object-cover'));
+        $athlete_image = get_the_post_thumbnail($athlete, 'thumbnail', array('class' => 'w-12 h-12  object-cover'));
       }
     }
-    
+
     // Get categories
     $categories = get_the_category();
   ?>
 
   <main class="site-main">
     <!-- Header Section -->
-    <section class="bg-gradient-to-br from-bsj-navy to-blue-900 text-white py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Back to News Link -->
-        <div class="mb-6">
-          <a href="<?php echo get_post_type_archive_link('post'); ?>" class="text-bsj-gold hover:text-yellow-400 transition flex items-center gap-2 inline-flex">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-            Back to News
-          </a>
-        </div>
-        
+    <section class="bg-gray-100">
+      <div class="max-w-4xl px-4 py-4 mx-auto">
         <!-- Post Meta -->
-        <div class="flex items-center gap-4 mb-4 flex-wrap">
+        <div class="flex items-center justify-center py-4">
           <?php if (!empty($categories)) : ?>
             <?php foreach (array_slice($categories, 0, 2) as $category) : ?>
-              <span class="bg-bsj-gold text-bsj-navy px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+              <span class="text-gray-600 text-xs font-bold uppercase tracking-wide">
                 <?php echo esc_html($category->name); ?>
               </span>
             <?php endforeach; ?>
           <?php endif; ?>
-          <span class="text-gray-300 text-sm">
-            <?php echo get_the_date('F j, Y'); ?>
-          </span>
         </div>
-        
+
         <!-- Post Title -->
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        <h1 class="text-3xl md:text-4xl font-bold text-center">
           <?php the_title(); ?>
         </h1>
-        
+
         <!-- Associated Athlete Link -->
         <?php if ($athlete_id) : ?>
-          <div class="mt-6 pt-6 border-t border-white/20">
-            <a href="<?php echo esc_url($athlete_permalink); ?>" class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 transition rounded-lg p-4 border border-white/20">
+          <div class=" pt-4 flex items-center justify-center">
+            <a href="<?php echo esc_url($athlete_permalink); ?>" class="inline-flex items-center gap-3 p-4">
               <?php if ($athlete_image) : ?>
                 <?php echo $athlete_image; ?>
               <?php else : ?>
-                <div class="w-12 h-12 rounded-lg bg-gray-700 flex items-center justify-center">
+                <div class="w-12 h-12 flex items-center justify-center">
                   <span class="text-white text-lg font-bold"><?php echo strtoupper(substr($athlete_name, 0, 2)); ?></span>
                 </div>
               <?php endif; ?>
               <div>
-                <div class="text-xs text-bsj-gold font-bold uppercase tracking-wide mb-1">Related Athlete</div>
-                <div class="text-white font-semibold hover:text-bsj-gold transition">
+                <div class="text-xs text-bsj-gold font-bold uppercase tracking-wide mb-1">Featuring</div>
+                <div class="font-semibold transition">
                   <?php echo esc_html($athlete_name); ?>
                 </div>
               </div>
@@ -90,10 +77,10 @@
         <?php endif; ?>
       </div>
     </section>
-    
+
     <!-- Featured Image -->
     <?php if (has_post_thumbnail()) : ?>
-      <section class="py-8 bg-gray-50">
+      <section class="bg-gray-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="rounded-lg overflow-hidden">
             <?php the_post_thumbnail('large', array('class' => 'w-full h-auto')); ?>
@@ -101,16 +88,16 @@
         </div>
       </section>
     <?php endif; ?>
-    
+
     <!-- Main Content Section -->
     <section class="py-16 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-lg max-w-none prose-headings:text-bsj-navy prose-headings:font-bold prose-a:text-bsj-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-bsj-navy prose-img:rounded-lg prose-blockquote:border-l-bsj-gold prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6">
+      <div class="prose  max-w-none prose-headings:text-bsj-navy prose-headings:font-bold prose-a:text-bsj-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-bsj-navy prose-img:rounded-lg prose-blockquote:border-l-bsj-gold prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6">
   <?php the_content(); ?>
 </div>
 
-        
-        
+
+
         <!-- Post Footer -->
         <div class="mt-12 pt-8 border-t border-gray-200">
           <div class="flex items-center justify-between flex-wrap gap-4">
@@ -126,13 +113,13 @@
                 </div>
               <?php endif; ?>
             </div>
-            
+
             <!-- Share or additional actions can go here -->
           </div>
         </div>
       </div>
     </section>
-    
+
     <!-- Related Posts Section (Optional) -->
     <?php
     $related_posts = new WP_Query(array(
@@ -142,7 +129,7 @@
       'category__in' => wp_list_pluck($categories, 'term_id'),
       'orderby' => 'rand'
     ));
-    
+
     if ($related_posts->have_posts()) : ?>
       <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -172,7 +159,7 @@
       </section>
       <?php wp_reset_postdata(); ?>
     <?php endif; ?>
-    
+
   </main>
 
 <?php endwhile; ?>

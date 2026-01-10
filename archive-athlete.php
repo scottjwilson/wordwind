@@ -34,7 +34,7 @@
                     ?>
                 </div>
             <?php else : ?>
-                <div class="text-center py-16">
+                <div class="grid py-16">
                     <p class="text-xl text-gray-600">No athletes found.</p>
                 </div>
             <?php endif; ?>
