@@ -32,20 +32,24 @@
     $categories = get_the_category();
   ?>
 
-  <main class="site-main">
+  <main class="site-main bg-gray-100 py-4">
+      <div class="max-w-4xl mx-auto bg-white rounded-md">
     <!-- Header Section -->
-    <section class="bg-gray-100">
+    <section class="">
       <div class="max-w-4xl px-4 py-4 mx-auto">
         <!-- Post Meta -->
         <div class="flex items-center justify-center py-4">
           <?php if (!empty($categories)) : ?>
             <?php foreach (array_slice($categories, 0, 2) as $category) : ?>
-              <span class="text-gray-600 text-xs font-bold uppercase tracking-wide">
+              <span class="text-bsj-gold text-xs font-bold uppercase tracking-wide px-4">
                 <?php echo esc_html($category->name); ?>
               </span>
             <?php endforeach; ?>
           <?php endif; ?>
         </div>
+        <p class="text-sm text-gray-500 text-center">
+          <?php echo get_the_date('M j, Y'); ?>
+        </p>
 
         <!-- Post Title -->
         <h1 class="text-3xl md:text-4xl font-bold text-center">
@@ -64,7 +68,7 @@
                 </div>
               <?php endif; ?>
               <div>
-                <div class="text-xs text-bsj-gold font-bold uppercase tracking-wide mb-1">Featuring</div>
+                <div class="text-xs text-bsj-gold font-bold uppercase tracking-wide mb-1 ">Featuring</div>
                 <div class="font-semibold transition">
                   <?php echo esc_html($athlete_name); ?>
                 </div>
@@ -80,9 +84,9 @@
 
     <!-- Featured Image -->
     <?php if (has_post_thumbnail()) : ?>
-      <section class="bg-gray-50">
+      <section>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="rounded-lg overflow-hidden">
+          <div class="overflow-hidden">
             <?php the_post_thumbnail('large', array('class' => 'w-full h-auto')); ?>
           </div>
         </div>
@@ -90,7 +94,7 @@
     <?php endif; ?>
 
     <!-- Main Content Section -->
-    <section class="py-16 bg-white">
+    <section class="py-8">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="prose  max-w-none prose-headings:text-bsj-navy prose-headings:font-bold prose-a:text-bsj-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-bsj-navy prose-img:rounded-lg prose-blockquote:border-l-bsj-gold prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-6">
   <?php the_content(); ?>
@@ -131,7 +135,7 @@
     ));
 
     if ($related_posts->have_posts()) : ?>
-      <section class="py-16 bg-gray-50">
+      <section class="py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 class="text-3xl font-bold text-bsj-navy mb-8">Related Articles</h2>
           <div class="grid md:grid-cols-3 gap-6">
@@ -159,6 +163,7 @@
       </section>
       <?php wp_reset_postdata(); ?>
     <?php endif; ?>
+      </div>
 
   </main>
 
