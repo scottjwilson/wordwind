@@ -1,87 +1,15 @@
 <?php
-function wordwind_enqueue_styles() {
-  wp_enqueue_style('wordwind-style', get_stylesheet_uri());
-  wp_enqueue_style('tailwind-output', get_template_directory_uri() . '/src/output.css');
-}
-add_action('wp_enqueue_scripts', 'wordwind_enqueue_styles');
+/**
+ * Wordwind Theme Functions
+ */
 
-function wordwind_enqueue_scripts() {
-  wp_enqueue_script(
-    'athletes-table',
-    get_template_directory_uri() . '/src/js/athletes-table.js',
-    array(),
-    filemtime(get_template_directory() . '/src/js/athletes-table.js'),
-    true
-  );
-}
-add_action('wp_enqueue_scripts', 'wordwind_enqueue_scripts');
+// Theme setup (enqueue scripts/styles, theme support, menus)
+require_once get_template_directory() . '/inc/theme-setup.php';
 
+// Custom nav walker for Tailwind styling
+require_once get_template_directory() . '/inc/class-tailwind-walker.php';
 
-function wordwind_setup() {
-  register_nav_menu('menuTop', 'Menu Top');
-  add_theme_support('title-tag');
-  add_theme_support('post-thumbnails');
-}
-
-add_action('after_setup_theme', 'wordwind_setup');
-
+// Template functions
 require_once get_template_directory() . '/inc/template-sections.php';
 require_once get_template_directory() . '/inc/template-athletes.php';
 require_once get_template_directory() . '/inc/template-functions.php';
-
-function wpdocs_custom_excerpt_length( $length ) {
-	return 10;
-}
-add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
-
-if ( ! class_exists( 'Custom_Tailwind_Walker' ) ) {
-  class Custom_Tailwind_Walker extends Walker_Nav_Menu {
-
-      // Start the element output (li tags)
-      public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-          $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-
-          $classes   = empty( $item->classes ) ? array() : (array) $item->classes;
-          // Add custom tailwind classes to all <li> items
-          $classes[] = 'mb-4 lg:mb-0 lg:mr-6';
-
-          if ( in_array( 'current-menu-item', $classes, true ) ) {
-              // Add specific classes for active/current menu items
-              $classes[] = 'underline';
-          }
-
-          $class_names = implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
-          $class_names = ' class="' . esc_attr( $class_names ) . '"';
-
-          $output .= $indent . '<li' . $class_names . '>';
-
-          $atts             = array();
-          $atts['title']    = ! empty( $item->attr_title ) ? $item->attr_title : '';
-          $atts['target']   = ! empty( $item->target ) ? $item->target : '';
-          $atts['rel']      = ! empty( $item->xfn ) ? $item->xfn : '';
-          $atts['href']     = ! empty( $item->url ) ? $item->url : '';
-          // Add custom tailwind classes to all <a> tags
-          $atts['class']    = 'text-gray-200 hover:text-white transition duration-300 p-2 block';
-
-          $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
-
-          $attributes = '';
-          foreach ( $atts as $attr => $value ) {
-              if ( ! empty( $value ) ) {
-                  $value      = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
-                  $attributes .= ' ' . $attr . '="' . $value . '"';
-              }
-          }
-
-          $item_output = $args->before;
-          $item_output .= '<a' . $attributes . '>';
-          $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-          $item_output .= '</a>';
-          $item_output .= $args->after;
-
-          $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
-      }
-
-      // You can also override start_lvl() and end_lvl() to customize <ul> wrappers
-  }
-}

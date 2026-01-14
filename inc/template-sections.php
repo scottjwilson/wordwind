@@ -16,10 +16,10 @@
         'secondary_button_link' => '#',
         'show_market_watch' => true, // Option to hide/show the market watch section
     );
-    
+
     // Merge defaults with passed arguments
     $args = wp_parse_args($args, $defaults);
-    
+
     echo '<section class="bg-gradient-to-br from-bsj-navy to-blue-900 text-white py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -42,7 +42,7 @@
                         </a>
                     </div>
                 </div>';
-    
+
     // Conditionally show market watch section
     if ($args['show_market_watch']) {
         echo '<div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
@@ -63,7 +63,7 @@
                     </div>
                 </div>';
     }
-    
+
     echo '</div>
         </div>
     </section>';
@@ -97,9 +97,9 @@ function getNewsletter(){
                   Get daily insights on the business of sports delivered to your inbox
               </p>
               <div class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-                  <input 
-                      type="email" 
-                      placeholder="Enter your email" 
+                  <input
+                      type="email"
+                      placeholder="Enter your email"
                       class="flex-1 px-6 py-4 rounded-md text-gray-900 ring-1 ring-bsj-gold focus:outline-none focus:ring-2"
                   />
                   <button class="bg-bsj-gold text-bsj-navy px-8 py-4 rounded-md font-bold hover:bg-yellow-500 transition whitespace-nowrap">
@@ -110,7 +110,7 @@ function getNewsletter(){
           </div>
       </section>';
   }
-  
+
 
 function getCategoryEmoji($category_name) {
     // Map category names to emojis
@@ -121,19 +121,19 @@ function getCategoryEmoji($category_name) {
         'Trades' => '🔄',
         'Business' => '💼',
     );
-    
+
     // Try exact match first
     if (isset($emoji_map[$category_name])) {
         return $emoji_map[$category_name];
     }
-    
+
     // Try case-insensitive match
     foreach ($emoji_map as $key => $emoji) {
         if (strcasecmp($category_name, $key) === 0) {
             return $emoji;
         }
     }
-    
+
     // Default emoji if no match found
     return '📰';
 }
