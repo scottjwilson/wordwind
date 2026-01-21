@@ -13,11 +13,28 @@ jobs:
       - name: 🚚 Get Latest Code
         uses: actions/checkout@v3
 
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📥 Install Dependencies
+        run: npm ci
+
+      - name: 🔨 Build Assets
+        run: npm run build
+
+      - name: 📋 List dist folder
+        run: ls -la dist/
+
       - name: 📂 Sync Files
         uses: SamKirkland/web-deploy@v1
         with:
-          target-server: scottjwilson.com
-          remote-user: scottjwilsoncom
+          target-server: ballstreetsportsjournal.com
+          remote-user: ballstreetsportsjournalcom
           private-ssh-key: ${{ secrets.SSH_KEY }}
           destination-path: /home/ballstreetsportsjournalcom/public_html/wp-content/themes/wordwind
+
           ssh-port: 6543
+          rsync-options: --archive --verbose --compress --delete --exclude=node_modules --exclude=.git --exclude=.github --exclude=src
