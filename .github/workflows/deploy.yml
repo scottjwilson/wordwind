@@ -3,7 +3,7 @@ name: Publish Website
 on:
   push:
     branches:
-      - main
+      - maiw
 jobs:
   web-deploy:
     name: 🚀 Deploy Website Every Commit
@@ -20,4 +20,3 @@ jobs:
           private-ssh-key: ${{ secrets.SSH_KEY }}
           destination-path: /home/ballstreetsportsjournalcom/public_html/wp-content/themes/wordwind
           ssh-port: 6543
-          rsync-options: --archive --verbose --compress --delete --exclude=node_modules --exclude=.git --exclude=.github
