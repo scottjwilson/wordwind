@@ -10,30 +10,26 @@
     </section>
 
     <!-- Athletes List Section -->
-    <section class="py-16 bg-gray-50">
+    <section class="py-16 bg-gray-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <?php if (have_posts()) : ?>
-                <?php
-                render_athletes_table([
-                    'athletes' => null,
-                    'view' => 'list',
-                    'show_rank' => false,
-                    'show_search' => true,
-                    'show_filters' => true,
-                ]);
-                ?>
+            <?php if (have_posts()): ?>
+                <?php render_athletes_table([
+                    "athletes" => null,
+                    "view" => "list",
+                    "show_rank" => false,
+                    "show_search" => true,
+                    "show_filters" => true,
+                ]); ?>
 
                 <!-- Pagination -->
                 <div class="mt-12 flex justify-center">
-                    <?php
-                    the_posts_pagination(array(
-                        'mid_size' => 2,
-                        'prev_text' => __('← Previous', 'wordwind'),
-                        'next_text' => __('Next →', 'wordwind'),
-                    ));
-                    ?>
+                    <?php the_posts_pagination([
+                        "mid_size" => 2,
+                        "prev_text" => __("← Previous", "wordwind"),
+                        "next_text" => __("Next →", "wordwind"),
+                    ]); ?>
                 </div>
-            <?php else : ?>
+            <?php else: ?>
                 <div class="grid py-16">
                     <p class="text-xl text-gray-600">No athletes found.</p>
                 </div>
