@@ -3,7 +3,7 @@ name: Publish Website
 on:
   push:
     branches:
-      - maiw
+      - main
 jobs:
   web-deploy:
     name: 🚀 Deploy Website Every Commit
