@@ -228,3 +228,33 @@ function ballstreet_register_sponsors_post_type()
     register_post_type("sponsor", $args);
 }
 add_action("init", "ballstreet_register_sponsors_post_type", 0);
+
+/**
+ * Sort athletes by NIL valuation (descending) on archive pages
+ * This makes rank = position in the NIL valuation leaderboard
+ */
+function ballstreet_sort_athletes_by_nil($query)
+{
+    if (is_admin() || !$query->is_main_query()) {
+        return;
+    }
+
+    if (
+        is_post_type_archive("athlete") ||
+        (is_tax() && $query->get("post_type") === "athlete")
+    ) {
+        $query->set("meta_query", [
+            "relation" => "OR",
+            "nil_clause" => [
+                "key" => "nil_valuation",
+                "compare" => "EXISTS",
+            ],
+            [
+                "key" => "nil_valuation",
+                "compare" => "NOT EXISTS",
+            ],
+        ]);
+        $query->set("orderby", ["nil_clause" => "DESC"]);
+    }
+}
+add_action("pre_get_posts", "ballstreet_sort_athletes_by_nil");

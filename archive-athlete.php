@@ -10,7 +10,7 @@
     </section>
 
     <!-- Athletes List Section -->
-    <section class="py-16 bg-gray-500">
+    <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <?php if (have_posts()): ?>
                 <?php render_athletes_table([
