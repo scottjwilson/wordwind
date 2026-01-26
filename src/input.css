@@ -3,9 +3,9 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-    --color-bsj-navy: #0A1628;
-    --color-bsj-blue: #1E40AF;
-    --color-bsj-gold: #F59E0B;
-    --color-bsj-light: #F8FAFC;
+    --color-bsj-navy: #0a1628;
+    --color-bsj-navy-light: #1a2d4a;
+    --color-bsj-blue: #1e40af;
+    --color-bsj-gold: #f59e0b;
+    --color-bsj-light: #f8fafc;
 }
-
