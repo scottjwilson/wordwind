@@ -9,7 +9,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<header class="site-header sticky top-0 z-50">
+<header class="site-header">
    <nav class="bg-bsj-navy text-white ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-14">
