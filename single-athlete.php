@@ -129,7 +129,7 @@
   <main class="site-main">
     <!-- Hero Section -->
 
-    <section class="bg-gradient-to-br from-bsj-navy to-blue-900 text-white py-12">
+    <section class="bg-gradient-to-b from-bsj-navy to-blue-900 text-white py-8">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center gap-4 mb-6">
           <!-- <a href="<?php echo get_post_type_archive_link(
@@ -221,7 +221,7 @@
             <?php endif; ?>
 
             <?php if ($nil_valuation): ?>
-              <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20 mt-6">
+              <div class="p-4 mt-6">
                 <div class="text-sm text-bsj-gold font-bold mb-1">NIL VALUATION</div>
                 <div class="text-3xl font-bold">
                   <?php if (is_numeric($nil_valuation)) {
@@ -341,7 +341,7 @@
               <!-- Sponsors Card -->
               <?php if (!empty($sponsor_data)): ?>
                 <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                  <h3 class="text-xl font-bold text-bsj-navy mb-4">Sponsors</h3>
+                  <h3 class="text-xl font-bold text-bsj-navy mb-4">Public Sponsors</h3>
                   <div class="space-y-4">
                     <?php foreach ($sponsor_data as $sponsor): ?>
                       <div class="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:border-bsj-gold transition">

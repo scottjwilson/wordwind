@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <div class="flex space-x-8 text-sm">
+                    <div class="flex space-x-8">
                         <a href="/news" class="text-white hover:text-bsj-gold">News</a>
                         <a href="/athletes" class="text-white hover:text-bsj-gold">Athletes</a>
                         <a href="/sponsors" class="text-white hover:text-bsj-gold">Sponsors</a>
