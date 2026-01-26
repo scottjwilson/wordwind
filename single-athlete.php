@@ -129,7 +129,7 @@
   <main class="site-main">
     <!-- Hero Section -->
 
-    <section class="bg-gradient-to-b from-bsj-navy to-blue-900 text-white py-8">
+    <section class="bg-gradient-to-br from-bsj-navy to-blue-900 text-white py-8">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center gap-4 mb-6">
           <!-- <a href="<?php echo get_post_type_archive_link(
