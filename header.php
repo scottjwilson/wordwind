@@ -9,7 +9,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<header class="site-header">
+<header class="site-header sticky top-0 z-50">
    <nav class="bg-bsj-navy text-white ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-14">
@@ -25,20 +25,19 @@
                 <div class="flex flex-1 justify-center px-8">
                     <form action="<?php echo esc_url(
                         home_url("/"),
-                    ); ?>" method="get" class="w-full max-w-md relative" data-header-search>
+                    ); ?>" method="get" class="w-full max-w-md flex" data-header-search>
                         <input type="text"
                                name="s"
-                               class="w-full px-4 py-2 bg-bsj-navy-light border border-bsj-navy-light rounded-md focus:ring-2 focus:ring-bsj-blue focus:border-transparent text-white placeholder-gray-400"
+                               class="w-full px-4 py-2 bg-bsj-navy-light border border-bsj-navy-light rounded-l-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-bsj-blue text-white placeholder-gray-400"
                                placeholder="Search athletes..."
                                value="<?php echo get_search_query(); ?>"
                                autocomplete="off"
                                data-header-search-input />
-
-                        <!-- Autocomplete Dropdown -->
-                        <div class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-96 overflow-y-auto"
-                             data-header-search-dropdown>
-                            <div data-header-search-results></div>
-                        </div>
+                        <button type="submit" class="px-4 py-2 bg-bsj-gold hover:bg-amber-500 rounded-r-md transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-bsj-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
                     </form>
                 </div>
 

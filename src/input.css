@@ -9,3 +9,18 @@
     --color-bsj-gold: #f59e0b;
     --color-bsj-light: #f8fafc;
 }
+
+/* Prevent scroll anchoring issues with sticky header */
+html {
+    overflow-anchor: none;
+}
+
+/* Prevent input focus from causing scroll jumps */
+[data-header-search-input]:focus {
+    scroll-margin-top: 0;
+}
+
+/* Ensure dropdown doesn't cause layout shifts */
+[data-header-search-dropdown] {
+    contain: layout;
+}

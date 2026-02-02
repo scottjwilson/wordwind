@@ -13,14 +13,21 @@
     constructor(container) {
       this.container = container;
       this.input = container.querySelector("[data-header-search-input]");
-      this.dropdown = container.querySelector("[data-header-search-dropdown]");
-      this.resultsList = container.querySelector(
-        "[data-header-search-results]",
-      );
 
-      if (!this.input || !this.dropdown || !this.resultsList) {
+      if (!this.input) {
         return;
       }
+
+      // Create dropdown in body to avoid layout issues with sticky header
+      this.dropdown = document.createElement("div");
+      this.dropdown.className =
+        "hidden fixed bg-white border border-gray-200 rounded-md shadow-lg z-[9999] max-h-96 overflow-y-auto";
+      this.dropdown.setAttribute("data-header-search-dropdown", "");
+
+      this.resultsList = document.createElement("div");
+      this.resultsList.setAttribute("data-header-search-results", "");
+      this.dropdown.appendChild(this.resultsList);
+      document.body.appendChild(this.dropdown);
 
       this.athletes = wordwindSearch.athletes || [];
       this.isOpen = false;
@@ -30,7 +37,6 @@
     }
 
     bindEvents() {
-      // Input events
       this.input.addEventListener(
         "input",
         this.debounce(() => this.onInput(), DEBOUNCE_MS),
@@ -119,9 +125,20 @@
         }
       });
 
-      // Scroll selected item into view
+      // Scroll selected item into view within dropdown only
       if (this.selectedIndex >= 0 && items[this.selectedIndex]) {
-        items[this.selectedIndex].scrollIntoView({ block: "nearest" });
+        const item = items[this.selectedIndex];
+        const dropdown = this.dropdown;
+        const itemTop = item.offsetTop;
+        const itemBottom = itemTop + item.offsetHeight;
+        const scrollTop = dropdown.scrollTop;
+        const dropdownHeight = dropdown.clientHeight;
+
+        if (itemTop < scrollTop) {
+          dropdown.scrollTop = itemTop;
+        } else if (itemBottom > scrollTop + dropdownHeight) {
+          dropdown.scrollTop = itemBottom - dropdownHeight;
+        }
       }
     }
 
@@ -158,6 +175,8 @@
         return;
       }
 
+      const fragment = document.createDocumentFragment();
+
       athletes.forEach((athlete) => {
         const item = document.createElement("div");
         item.setAttribute("data-search-result", "");
@@ -190,13 +209,20 @@
                     </a>
                 `;
 
-        this.resultsList.appendChild(item);
+        fragment.appendChild(item);
       });
 
+      this.resultsList.appendChild(fragment);
       this.openDropdown();
     }
 
     openDropdown() {
+      // Position dropdown below input using fixed positioning
+      const inputRect = this.input.getBoundingClientRect();
+      this.dropdown.style.top = `${inputRect.bottom + 4}px`;
+      this.dropdown.style.left = `${inputRect.left}px`;
+      this.dropdown.style.width = `${this.container.offsetWidth}px`;
+
       this.dropdown.classList.remove("hidden");
       this.isOpen = true;
     }
